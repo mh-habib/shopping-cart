@@ -82,30 +82,40 @@
          plusMinus("totalPhone", 1);
          prise("phonePrise", 100);
          prise("subtotal", 100);
-         prise("totalPrise", 100);
+         grandTotal();
       })
       document.getElementById("phoneMinusButton").addEventListener("click", function () {
          plusMinus("totalPhone", -1);
          prise("phonePrise", -100);
          prise("subtotal", -100);
-         prise("totalPrise", -100);
+         grandTotal();
       })
       document.getElementById("coverPlusButton").addEventListener("click", function () {
          plusMinus("totalCover", 1);
          prise("coverPrise", 50);
          prise("subtotal", 50);
-         prise("totalPrise", 50);
+         grandTotal();
       })
       document.getElementById("coverMinusButton").addEventListener("click", function () {
          plusMinus("totalCover", -1);
          prise("coverPrise", -50);
          prise("subtotal", -50);
-         prise("totalPrise", -50);
+         grandTotal();
       })
+      
+      function grandTotal(){
+         const subTotalPrise = document.getElementById("subtotal").innerText;  
+         const subTotalNumber = parseFloat(subTotalPrise);
+         const totalTaxPayable = subTotalNumber * .10; 
+      
+         const grandTotalPrise = totalTaxPayable + subTotalNumber;
+         document.getElementById("totalPrise").innerText = grandTotalPrise;
+         document.getElementById("tax").innerText = totalTaxPayable
+       }
 
       function plusMinus(phoneOrCover, number) {
          const presentPhone = document.getElementById(phoneOrCover).value;
-         const presentPhoneNumber = parseFloat(presentPhone);
+         const presentPhoneNumber = parseInt(presentPhone);
          const onePlusPhone = presentPhoneNumber + number;
          document.getElementById(phoneOrCover).value = onePlusPhone;
       }
@@ -116,8 +126,6 @@
          const totalPrise = phonePriseNumber + priseAmount;
          document.getElementById(productPrise).innerText = totalPrise;
       }
-
-
    </script>
 </body>
 
